@@ -1,7 +1,3 @@
-# Extraction of Key Phrases from Normalised Text
-# Created by Team Axenhammer, https://github.com/Axenhammer
-# Licensed as MIT
-
 import re, operator, sys, os
 
 debug = False
@@ -124,9 +120,7 @@ def main():
         stopwordpattern = build_stop_word_regex(stoppath)
 
         phraseList = generate_candidate_keywords(sentenceList, stopwordpattern)
-
         wordscores = calculate_word_scores(phraseList)
-
         keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
 
         if debug: print (keywordcandidates)
@@ -141,7 +135,7 @@ def main():
         rake = Rake("Stop_Word_List.txt")
         keywords = rake.run(text)
         os.system("cls")
-        print ("\n The Prominent keywords in the given text are ", keywords)
+        print ("\n Issue: ", keywords)
         print()
 if __name__ == '__main__':
     main()
