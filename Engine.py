@@ -1,7 +1,3 @@
-# Extraction of Key Phrases from Normalised Text
-# Created by Team Axenhammer, https://github.com/Axenhammer
-# Licensed as MIT
-
 import re, operator, sys, os
 
 debug = False
