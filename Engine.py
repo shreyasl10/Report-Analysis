@@ -1,4 +1,5 @@
 import re, operator, sys, os
+from nltk.tag import pos_tag
 
 debug = False
 test = True
@@ -138,4 +139,9 @@ def main():
         print ("\n Issue: ", keywords)
         print()
 if __name__ == '__main__':
-    main()
+    #main()
+    sentence = sys.argv[1]
+    tagged_sent = pos_tag(sentence.split())
+    propernouns = [word for word,pos in tagged_sent if pos == 'NN']
+    # verbs = [word for word,pos in tagged_sent if pos == 'VB']
+    print("Category: " , propernouns)
