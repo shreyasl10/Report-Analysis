@@ -94,3 +94,7 @@ background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75))
   margin: 4px 2px;
   cursor: pointer;
 }
+p
+{text-indent: 20%;
+  text-align: center;
+}
