@@ -1,5 +1,10 @@
+#!/usr/bin/env python
+import pymysql
 import re, operator, sys, os
 from nltk.tag import pos_tag
+
+# import MySQLdb
+
 
 debug = False
 test = True
@@ -136,11 +141,24 @@ def main():
         rake = Rake("Stop_Word_List.txt")
         keywords = rake.run(text)
         os.system("cls")
-        print ("\n Issue(s) Relation: ", keywords)
-        print()
+        print ("Issue(s) Relation: ", keywords)
+
 if __name__ == '__main__':
-    main()
-    sentence = sys.argv[1]
-    tagged_sent = pos_tag(sentence.split())
-    propernouns = [word for word,pos in tagged_sent if pos == 'NN']
-    print("Category: " , propernouns)
+    # main()
+    # sentence = sys.argv[1]
+    # tagged_sent = pos_tag(sentence.split())
+    # propernouns = [word for word,pos in tagged_sent if pos == 'NN']
+    # print("Category: " , propernouns)
+    # db = MySQLdb.connect("localhost","user","password","database")
+    # cursor = db.cursor()
+    """
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='9563', db='freemanDB')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users")
+    print(cur.description)
+    print()
+    for row in cur:
+        print(row)
+    cur.close()
+    conn.close()
+    """

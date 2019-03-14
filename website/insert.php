@@ -6,8 +6,8 @@ $Complain = $_POST['message'];
 
 $host= "localhost";
 $dbUsername= "root";
-$dbPassword= "password";
-$dbname="orms";
+$dbPassword= "9563";
+$dbname="test1";
 
 $conn= new mysqli($host,$dbName,$dbLocation,$dbEmail,$dbComplain);
 
