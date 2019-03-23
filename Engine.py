@@ -3,7 +3,9 @@ import pymysql
 import re, operator, sys, os
 from nltk.tag import pos_tag
 
+
 # import MySQLdb
+
 
 
 debug = False
@@ -142,23 +144,52 @@ def main():
         keywords = rake.run(text)
         os.system("cls")
         print ("Issue(s) Relation: ", keywords)
+        return(str(keywords))
 
 if __name__ == '__main__':
-    # main()
-    # sentence = sys.argv[1]
-    # tagged_sent = pos_tag(sentence.split())
-    # propernouns = [word for word,pos in tagged_sent if pos == 'NN']
-    # print("Category: " , propernouns)
-    # db = MySQLdb.connect("localhost","user","password","database")
-    # cursor = db.cursor()
-    """
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='9563', db='freemanDB')
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users")
-    print(cur.description)
-    print()
-    for row in cur:
-        print(row)
-    cur.close()
-    conn.close()
-    """
+    str = main()
+    servername = "localhost";
+    username= "root";
+    password= "";
+    dbname="repo";
+    # Connect to the database
+    con = pymysql.connect(host=servername, user=username, password=password,db=dbname)
+
+    with con:
+        cur = con.cursor()
+        query_ = "INSERT INTO register (message) VALUES (%s)"
+        cur.execute(query_,(sys.argv[1]))
+
+
+    Checklist = [
+                    "water",
+                    "electricity",
+                    "bathroom",
+                    "maintainance",
+                    "abusing",
+                    "fees",
+                    "teaching"
+                ]
+
+    category = "others"
+    for word in Checklist:
+            #print(category, word)
+            if(word in str):
+                category = word
+
+    category = category.title()
+    print("Category: ", category)
+
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM register")
+        rows = cur.fetchall()
+        print(rows)
+
+    # category = "Water"
+
+    with con:
+        cur = con.cursor()
+        query_ = "UPDATE `result` SET severity = severity+1 WHERE category=%s"
+        # query_ = "INSERT INTO result (category, severity) VALUES (%s , %s)"
+        cur.execute(query_,(category))
